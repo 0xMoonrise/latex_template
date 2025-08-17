@@ -1,18 +1,22 @@
-MAIN = main
-LATEX = pdflatex
-LATEXFLAGS = -shell-escape
-OUTPUT_DIR = build
-PDF ?= document
-SRC_DIR = src
+MD          := report.md
+PDF         := out.pdf
+TEMPLATE    := src/main.tex
+PDF_ENGINE  := xelatex
+HIGHLIGHT   := pygments
 
-all: $(SRC_DIR)/$(MAIN)
+PANDOC_FLAGS := --template=$(TEMPLATE) --pdf-engine=$(PDF_ENGINE) --highlight-style=$(HIGHLIGHT)
 
-$(SRC_DIR)/$(MAIN): $(SRC_DIR)/$(MAIN).tex
-	mkdir -p $(OUTPUT_DIR)
-	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUTPUT_DIR) --jobname=$(PDF) $(SRC_DIR)/$(MAIN).tex
-	mv $(OUTPUT_DIR)/$(PDF).pdf .
+.PHONY: all pdf clean
+
+all: pdf
+
+pdf: $(PDF)
+
+$(PDF): $(MD) $(TEMPLATE) Makefile
+	pandoc $(MD) $(PANDOC_FLAGS) -o $(PDF)
+
+%.pdf: %.md $(TEMPLATE) Makefile
+	pandoc $< $(PANDOC_FLAGS) -o $@
 
 clean:
-	rm -rf $(OUTPUT_DIR)/*
-	rm -r *.pdf
-.PHONY: clean
+	rm -f $(PDF)
