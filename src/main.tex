@@ -53,12 +53,12 @@ $if(tables)$
 \usepackage{calc}
 \usepackage{etoolbox}
 \usepackage{footnote}
-\makesavenoteenv{longtable} % permite notas al pie dentro de longtable
+\makesavenoteenv{longtable}
 $endif$
 
 $if(strikeout)$
 \usepackage[normalem]{ulem}
-\ifdefined\pdfstringdefDisableCommands
+\ifdefined\pdfstringdefDisableCommands%
   \pdfstringdefDisableCommands{\renewcommand{\sout}[1]{#1}}
 \fi
 $endif$
@@ -70,17 +70,17 @@ $if(icons-dir)$\renewcommand{\iconsdir}{$icons-dir$}$endif$
 \usepackage{graphicx}
 \makeatletter
 \def\ScaleWidthIfNeeded{%
-  \ifdim\Gin@nat@width>\linewidth \linewidth \else \Gin@nat@width \fi
+  \ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi
 }
 \def\ScaleHeightIfNeeded{%
-  \ifdim\Gin@nat@height>\textheight \textheight \else \Gin@nat@height \fi
+  \ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi
 }
-\let\Oldincludegraphics\includegraphics
+\let\Oldincludegraphics\includegraphics%
 \renewcommand{\includegraphics}[2][]{%
   \begingroup
   \setkeys{Gin}{keepaspectratio}%
   \edef\temp{#1}%
-  \ifx\temp\empty
+  \ifx\temp\empty%
     \Oldincludegraphics[width=\ScaleWidthIfNeeded,height=\ScaleHeightIfNeeded]{#2}%
   \else
     \Oldincludegraphics[#1]{#2}%
@@ -89,8 +89,8 @@ $if(icons-dir)$\renewcommand{\iconsdir}{$icons-dir$}$endif$
 }
 \makeatother
 
-\cftsetindents{section}{1em}{1em}
-\setlength{\parindent}{5em}
+%\cftsetindents{section}{1em}{1em}
+%\setlength{\parindent}{5em}
 \pagestyle{fancy}
 \fancyhf{} 
 \fancyfoot[R]{\thepage} 
@@ -110,7 +110,6 @@ $if(icons-dir)$\renewcommand{\iconsdir}{$icons-dir$}$endif$
 
 \newdateformat{mydate}{\THEDAY\ de \monthname[\THEMONTH]\ de \THEYEAR}
 
-
 \newcommand{\uname}{\parbox{\linewidth}{\centering $name$}}
 \newcommand{\utitle}{$title$}
 \newcommand{\usubject}{$subject$}
@@ -119,7 +118,7 @@ $if(icons-dir)$\renewcommand{\iconsdir}{$icons-dir$}$endif$
 \newcommand{\unin}{$university$}
 \newcommand{\ucareer}{$career$}
 \newcommand{\udepartment}{$department$}
-\newcommand{\uwhere}{$where$}
+\newcommand{\uwhere}{$where$~}
 
 \providecommand{\tightlist}{}
 

@@ -1,5 +1,5 @@
-MD          := report.md
-PDF         := out.pdf
+MD          := $(FILENAME).md
+PDF         := $(FILENAME).pdf
 TEMPLATE    := src/main.tex
 PDF_ENGINE  := xelatex
 HIGHLIGHT   := pygments
@@ -12,10 +12,10 @@ all: pdf
 
 pdf: $(PDF)
 
-$(PDF): $(MD) $(TEMPLATE) Makefile
+$(PDF): $(MD) $(TEMPLATE)
 	pandoc $(MD) $(PANDOC_FLAGS) -o $(PDF)
 
-%.pdf: %.md $(TEMPLATE) Makefile
+%.pdf: %.md $(TEMPLATE)
 	pandoc $< $(PANDOC_FLAGS) -o $@
 
 clean:
