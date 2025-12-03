@@ -9,7 +9,7 @@ python3 -m reloadserver --watch viewer.html --watch build/path/to/example.pdf
 ```
 
 ```
-http://localhost:8000/viewer.html?path=Test_PDF/example.pdf
+http://localhost:8000/viewer.html?path=example/example.pdf
 ```
 
 Note: The colours have been inverted; change the `viewer.html` styles if you prefer normal colours.
