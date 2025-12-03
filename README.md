@@ -17,3 +17,9 @@ where: "Room 101"
 toc: true
 icons-dir: images/
 ```
+
+Web viewer server
+_https://pypi.org/project/reloadserver/_
+```
+python3 -m reloadserver --watch viewer.html --watch build/report.pdf
+```

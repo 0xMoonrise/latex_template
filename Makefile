@@ -1,22 +1,12 @@
-MD          := $(FILENAME).md
-PDF         := $(FILENAME).pdf
-TEMPLATE    := src/main.tex
-PDF_ENGINE  := xelatex
-HIGHLIGHT   := pygments
+MAIN = main
+LATEX = pdflatex
+LATEXFLAGS = -shell-escape
+OUTPUT_DIR = build
+PDF ?= report
+SRC_DIR = src
 
-PANDOC_FLAGS := --template=$(TEMPLATE) --pdf-engine=$(PDF_ENGINE) --highlight-style=$(HIGHLIGHT)
+all: $(SRC_DIR)/$(MAIN)
 
-.PHONY: all pdf clean
-
-all: pdf
-
-pdf: $(PDF)
-
-$(PDF): $(MD) $(TEMPLATE)
-	pandoc $(MD) $(PANDOC_FLAGS) -o $(PDF)
-
-%.pdf: %.md $(TEMPLATE)
-	pandoc $< $(PANDOC_FLAGS) -o $@
-
-clean:
-	rm -f $(PDF)
+$(SRC_DIR)/$(MAIN): $(SRC_DIR)/$(MAIN).tex
+	mkdir -p $(OUTPUT_DIR)
+	$(LATEX) $(LATEXFLAGS) -output-directory=$(OUTPUT_DIR) --jobname=$(PDF) $(SRC_DIR)/$(MAIN).tex
