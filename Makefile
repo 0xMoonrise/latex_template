@@ -2,6 +2,7 @@ include .env
 
 LATEX = pdflatex
 OUT = build/$(NAME)
+PNAME := $(subst ",,$(NAME))
 
 NAMES := $(subst \\,\\\\, $(NAMES))
 
@@ -20,3 +21,10 @@ all:
 		 \def\uwhere{$(WHERE)} \
 		 \def\uname{\parbox{\linewidth}{\centering $(NAMES)}} \
 		 \input{src/main.tex}"
+
+backup:
+	mkdir -p $(BACKUP)/
+	zip -r $(BACKUP)/$(PNAME)-$(shell date '+%Y-%m-%d').zip src/* build/$(PNAME)
+
+restore:
+	git restore src/body.tex src/main.tex
